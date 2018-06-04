@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+    <!--<include file="struts-default.xml" />-->
+    <constant name="struts.devMode" value="true" />
+    <!--<constant name="struts.multipart.saveDir" value="C:/Users/edutilos/Desktop/temp" />-->
+    <constant name="struts.multipart.maxSize" value="1000000" />
+    <constant name="struts.custom.i18n.resources" value="global" />
+
+
+    <package name="jfreeChart" extends="jfreechart-default">
+        <action name="pieChart" class="com.edutilos.action.JFreeChartAction" method="generatePieChart">
+            <result name="pieChart" type="chart">
+                <param name="width">500</param>
+                <param name="height">500</param>
+            </result>
+        </action>
+
+        <action name="ringChart" class="com.edutilos.action.JFreeChartAction" method="generateRingChart">
+            <result name="ringChart" type="chart">
+                <param name="width">500</param>
+                <param name="height">500</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="helloworld" extends="struts-default">
+
+        <interceptors>
+            <interceptor name="helloWorldInterceptor" class="com.edutilos.interceptor.HelloWorldInterceptor" />
+            <interceptor name="personInterceptor" class="com.edutilos.interceptor.PersonInterceptor" >
+              <param name="id">1</param>
+                <param name="name">foo</param>
+                <param name="age">10</param>
+                <param name="wage">100.0</param>
+            </interceptor>
+            <interceptor-stack name="stack1">
+                <interceptor-ref name="helloWorldInterceptor" />
+                <interceptor-ref name="personInterceptor" />
+            </interceptor-stack>
+        </interceptors>
+
+
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+
+        <action name="hello"
+                class="com.edutilos.action.HelloWorldAction"
+                method="execute">
+            <interceptor-ref name="stack1" />
+            <interceptor-ref name="logger" ></interceptor-ref>
+            <interceptor-ref name="timer">
+                <param name="logLevel">debug</param>
+                    </interceptor-ref>
+            <interceptor-ref name="params" >
+            <param name="devMode">true</param>
+            </interceptor-ref>
+           <!-- <result name="success">/HelloWorld.jsp</result>-->
+            <result name="success" type="freemarker">/HelloWorld.fm</result>
+
+        </action>
+
+        <action name="person"
+                class="com.edutilos.action.HelloWorldAction"
+                method="getPerson">
+            <result name="person">/Person.jsp</result>
+        </action>
+
+
+        <action name="actionRes1"
+                class="com.edutilos.action.WorkerAction"
+            method="rs1"
+        >
+            <result name="res1">/WorkerResult1.jsp</result>
+        </action>
+        <action name="actionRes2"
+                class="com.edutilos.action.WorkerAction"
+                method="rs2">
+            <result name="res2">/WorkerResult2.jsp</result>
+        </action>
+
+
+        <action name="upload" class="com.edutilos.action.FileUploadAction"
+          method="execute"
+        >
+          <!--  <interceptor-ref name="basicStack" />
+            <interceptor-ref name="fileUpload">
+            <param name="allowedTypes">image/jpeg,image/png,image/giff,text/plain,text/html</param>
+            </interceptor-ref>-->
+            <result name="success">/FileUploadSuccess.jsp</result>
+            <result name="error">/FileUploadFailure.jsp</result>
+        </action>
+
+
+        <action name="multipleUpload" class="com.edutilos.action.MultipleFilesUploadAction">
+            <result name="success">/FileUploadSuccess.jsp</result>
+            <result name="error">/FileUploadFailure.jsp</result>
+        </action>
+
+
+        <!-- person jdbc actions -->
+        <!--findAll -->
+        <action name="findAll" class="com.edutilos.action.PersonJDBCAction" method="findAll">
+            <result name="success">/person/findAll.jsp</result>
+        </action>
+        <!-- savePerson -->
+        <action name="savePerson" class="com.edutilos.action.PersonJDBCAction" method="savePerson">
+            <result name="success">/person/findAll.jsp</result>
+        </action>
+        <!-- updatePerson -->
+        <action name="updatePerson" class="com.edutilos.action.PersonJDBCAction" method="updatePerson">
+            <result name="success">/person/findAll.jsp</result>
+        </action>
+        <!--deletePerson -->
+        <action name="deletePerson" class="com.edutilos.action.PersonJDBCAction" method="deletePerson">
+            <result name="success">/person/findAll.jsp</result>
+        </action>
+        <!-- findById -->
+        <action name="findById" class="com.edutilos.action.PersonJDBCAction" method="findById">
+            <result name="success">/person/findById.jsp</result>
+        </action>
+
+
+        <!-- worker JDO actions -->
+        <action name="findAllWorker" class="com.edutilos.action.WorkerJDOAction" method="findAll">
+            <result name="success">/worker/findAll.jsp</result>
+        </action>
+        <action name="findByIdWorker" class="com.edutilos.action.WorkerJDOAction" method="findById">
+            <result name="success">/worker/findById.jsp</result>
+        </action>
+        <action name="saveWorker" class="com.edutilos.action.WorkerJDOAction" method="saveWorker">
+            <result name="success">/worker/findAll.jsp</result>
+        </action>
+        <action name="updateWorker" class="com.edutilos.action.WorkerJDOAction" method="updateWorker">
+            <result name="success">/worker/findAll.jsp</result>
+        </action>
+        <action name="deleteWorker" class="com.edutilos.action.WorkerJDOAction" method="deleteWorker">
+            <result name="success">/worker/findAll.jsp</result>
+        </action>
+
+        <!-- sendMail-->
+        <action name="sendMail" class="com.edutilos.action.SendMailAction">
+            <result name="success">/sendMail/success.jsp</result>
+            <result name="error">/sendMail/error.jsp</result>
+        </action>
+
+        <!--employee action-->
+        <action name="employeeAction" class="com.edutilos.action.EmployeeAction">
+            <result name="success">/employee/success.jsp</result>
+            <result name="input">/employee/index.jsp</result>
+        </action>
+
+
+        <!-- locale , i18n actions -->
+        <action name="localeAction" class="com.edutilos.action.LocaleAction">
+            <result name="success">/i18n/success.jsp</result>
+        </action>
+        <action name="localeChangeAction" class="com.edutilos.action.LocaleAction"
+                method="changeLocale">
+            <result name="success">/i18n/index.jsp</result>
+        </action>
+        <!-- custom converter example -->
+        <action name="systemDetailsAction" class="com.edutilos.action.SystemDetailsAction">
+            <result name="success">/systemDetails.jsp</result>
+        </action>
+        <!-- npe action -->
+        <action name="npeAction" class="com.edutilos.action.NPEAction">
+            <exception-mapping exception="java.lang.NullPointerException" result="error" />
+            <result name="success">/npe.jsp</result>
+            <result name="error">/customErrorPage.jsp</result>
+        </action>
+        <!-- bean integration -->
+          <action name="springWorkerAction" class="springWorkerClass">
+              <result name="success">/springWorker.jsp</result>
+          </action>
+    </package>
+</struts>

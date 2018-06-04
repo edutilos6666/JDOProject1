@@ -1,0 +1,11 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2018-06-04 19:28:18 #1 store] 
+Database 'C:\Users\edutilos\IdeaProjects\JDOProject1\out\artifacts\JDOProject1\exploded\db\worker.odb' has been recovered (tr. 8-11)
+
+[2018-06-04 19:28:18 #2 store] 
+Database 'C:\Users\edutilos\IdeaProjects\JDOProject1\out\artifacts\JDOProject1\exploded\db\worker.odb' is opened by 5784@DESKTOP-1EC73US
+
+[2018-06-04 19:28:18 #3 type] 
+Type com.edutilos.pojo.Worker is not enhanced.
+

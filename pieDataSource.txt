@@ -1,0 +1,5 @@
+Chrome=100
+Firefox=70
+Edge=50
+Opera=60
+IE Explorer=10

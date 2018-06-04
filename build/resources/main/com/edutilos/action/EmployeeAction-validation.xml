@@ -1,0 +1,54 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+
+ <validators>
+    <field name="employee.id">
+       <field-validator type="required">
+           <message>employee id is required</message>
+       </field-validator>
+        <field-validator type="long">
+            <param name="min">1</param>
+            <param name="max">100</param>
+            <message>employee id must be in [1, 100]</message>
+        </field-validator>
+    </field>
+    
+    
+    <field name="employee.name">
+        <field-validator type="requiredstring">
+            <message>employee name is required</message>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="regex">
+                <![CDATA[[a-zA-Z]+]]>
+            </param>
+            <message>employee name must be in letters</message>
+        </field-validator>
+    </field>
+
+
+    <field name="employee.age">
+        <field-validator type="required">
+            <message>employee age is required</message>
+        </field-validator>
+        <field-validator type="int">
+            <param name="min">1</param>
+            <param name="max">100</param>
+            <message>employee age must be in [1, 100]</message>
+        </field-validator>
+    </field>
+
+    <field name="employee.wage">
+        <field-validator type="required">
+            <message>employee wage is required</message>
+        </field-validator>
+<!--        <field-validator type="double">
+            <param name="minExclusive">100.0</param>
+            <param name="maxExclusive">300.0</param>
+            <message>employee wage must be in [100, 300]</message>
+        </field-validator>-->
+    </field>
+    
+    
+</validators>
